@@ -1,0 +1,18 @@
+--- angular.js.old	2011-11-28 16:56:13.067710100 +0100
++++ angular.js	2011-11-28 16:56:43.607132700 +0100
+@@ -1,5 +1,5 @@
+ /**
+- * @license AngularJS v0.10.5
++ * license AngularJS v0.10.5
+  * (c) 2010-2011 AngularJS http://angularjs.org
+  * License: MIT
+  */
+@@ -8629,7 +8629,7 @@
+       SHORTDAY: 'Sun,Mon,Tue,Wed,Thu,Fri,Sat'.split(','),
+       AMPMS: ['AM','PM'],
+       medium: 'MMM d, y h:mm:ss a',
+-      short: 'M/d/yy h:mm a',
++      'short': 'M/d/yy h:mm a',
+       fullDate: 'EEEE, MMMM d, y',
+       longDate: 'MMMM d, y',
+       mediumDate: 'MMM d, y',
