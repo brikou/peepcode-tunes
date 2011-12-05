@@ -1,9 +1,7 @@
 
-TunesCtrl = ($xhr, player) ->
-    scope = this
-    scope.player = player
-    $xhr "GET", "albums.json", (statusCode, body) ->
-        scope.albums = body
+TunesCtrl = ($xhr, @player) ->
+    $xhr "GET", "albums.json", (code, response) =>
+        @albums = response
 
 "use strict"
 
@@ -77,5 +75,4 @@ angular.service "player", (audio) ->
     player
 
 angular.service "audio", ($document) ->
-    audio = $document[0].createElement("audio")
-    audio
+    $document[0].createElement("audio")
