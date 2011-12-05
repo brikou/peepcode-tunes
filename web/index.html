@@ -7,19 +7,26 @@
         <script src="js/app.js.php"></script>
     </head>
     <body ng:controller="TunesCtrl">
+
         <div id="container">
+
             <div class="playlist">
                 <h1>Playlist</h1>
+
                 <nav>
-                    <button class="control play" ng:click="player.play()" ng:hide="player.playing">Play</button>
-                    <button class="control pause" ng:click="player.pause()" ng:show="player.playing">Pause</button>
-                    <button class="control prev" ng:click="player.previous()">Prev</button>
-                    <button class="control next" ng:click="player.next()">Next</button>
+                    <button class="control-play"  ng:click="player.play()" ng:hide="player.playing">Play</button>
+                    <button class="control-pause" ng:click="player.pause()" ng:show="player.playing">Pause</button>
+                    <button class="control-prev"  ng:click="player.previous()">Prev</button>
+                    <button class="control-next"  ng:click="player.next()">Next</button>
                 </nav>
+
                 <ul class="albums">
-                    <li class="album" ng:repeat="album in player.playlist"
-                        ng:class="player.current.album == $index && 'current'">
-                        <button class="queue remove" ng:click="player.playlist.remove(album)"></button>
+                    <li class="album"
+                        ng:repeat="album in player.playlist"
+                        ng:class="player.current.album == $index && 'current'"
+                    >
+                        <button class="queue-remove" ng:click="player.playlist.remove(album)">Remove</button>
+
                         <span class="album-title">{{album.title}}</span>
                         <span class="artist-name">{{album.artist}}</span>
                         <ol class="tracks">
@@ -30,16 +37,19 @@
                     </li>
                 </ul>
             </div>
+
             <section class="library">
                 <h1>Music Library</h1>
+
                 <ul class="albums">
                     <li class="album current" ng:repeat="album in albums">
-                        <button class="queue add" ng:click="player.playlist.add(album)"></button>
+                        <button class="queue-add" ng:click="player.playlist.add(album)">Add</button>
                         <span class="album-title">{{album.title}}</span>
                         <span class="artist-name">{{album.artist}}</span>
                     </li>
                 </ul>
             </section>
+
         </div>
     </body>
 </html>

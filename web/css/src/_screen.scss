@@ -36,25 +36,23 @@ body {
     padding: .5em 0 0 1.5em;
 }
 
-.album button.queue {
-    position: absolute;
-    left: 0;
-    width: 16px;
-    height: 16px;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    background: transparent;
-    cursor: pointer;
+/* = queue ================================================================ */
+
+@import "queue/*.png";
+
+$queue-sprite-dimensions: true;
+
+@include all-queue-sprites;
+
+.album {
+    button {
+        @include reset-box-model;
+        @include hide-text;
+        cursor: pointer;
+    }
 }
 
-.album .queue.add {
-    background-image: url('../images/add.png');
-}
-
-.album .queue.remove {
-    background-image: url('../images/remove.png');
-}
+/* ------------------------------------------------------------------------ */
 
 .album-title {
     margin-right: 10px;
@@ -67,52 +65,21 @@ body {
     min-height: 100%;
 }
 
+/* = control ============================================================== */
+
+@import "control/*.png";
+
+$control-sprite-dimensions: true;
+
+@include all-control-sprites;
+
 nav {
-    width: 180px;
-    margin: auto;
-    padding: 0;
+    text-align: center;
 
-    button.control {
-        text-indent: -9999px;
-        width: 55px;
-        height: 50px;
-        border: 0;
-        padding: 10px;
-        margin: 0;
-        background: transparent;
+    button {
+        @include reset-box-model;
+        @include hide-text;
         cursor: pointer;
-    }
-
-    button.play {
-        background: url('../images/control_play.png') center no-repeat;
-    }
-
-    button.play:hover {
-        background: url('../images/control_play_hover.png') center no-repeat;
-    }
-
-    button.pause {
-        background: url('../images/control_pause.png') center no-repeat;
-    }
-
-    button.pause:hover {
-        background: url('../images/control_pause_hover.png') center no-repeat;
-    }
-
-    button.prev {
-        background: url('../images/control_start.png') center no-repeat;
-    }
-
-    button.prev:hover {
-        background: url('../images/control_start_hover.png') center no-repeat;
-    }
-
-    button.next {
-        background: url('../images/control_end.png') center no-repeat;
-    }
-
-    button.next:hover {
-        background: url('../images/control_end_hover.png') center no-repeat;
     }
 }
 
