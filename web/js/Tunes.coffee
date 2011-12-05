@@ -10,6 +10,7 @@ TunesCtrl = ($xhr, player) ->
 TunesCtrl.$inject = [ "$xhr", "player" ]
 
 angular.service "player", (audio) ->
+
     player = undefined
     playlist = []
     paused = false
