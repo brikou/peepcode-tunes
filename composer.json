@@ -1,0 +1,7 @@
+{
+    "name": "Music Library",
+    "version": "0.1.0",
+    "require": {
+        "kriswallsmith/assetic": "master-dev"
+    }
+}
