@@ -19,45 +19,46 @@ angular.service "player", (audio) ->
         playlist: playlist
         current: current
         playing: false
+
         play: (track, album) ->
-            return unless playlist.length
-            current.track = track if angular.isDefined(track)
-            current.album = album if angular.isDefined(album)
-            audio.src = playlist[current.album].tracks[current.track].url unless paused
+            return unless @playlist.length
+            @current.track = track if angular.isDefined(track)
+            @current.album = album if angular.isDefined(album)
+            audio.src = @playlist[@current.album].tracks[@current.track].url unless paused
             audio.play()
-            player.playing = true
+            @playing = true
             paused = false
 
         pause: ->
-            if player.playing
+            if @playing
                 audio.pause()
-                player.playing = false
+                @playing = false
                 paused = true
 
         reset: ->
-            player.pause()
-            current.album = 0
-            current.track = 0
+            @pause()
+            @current.album = 0
+            @current.track = 0
 
         next: ->
-            return unless playlist.length
+            return unless @playlist.length
             paused = false
-            if playlist[current.album].tracks.length > (current.track + 1)
-                current.track++
+            if @playlist[@current.album].tracks.length > (@current.track + 1)
+                @current.track++
             else
-                current.track = 0
-                current.album = (current.album + 1) % playlist.length
-            player.play()  if player.playing
+                @current.track = 0
+                @current.album = (@current.album + 1) % @playlist.length
+            @play() if @playing
 
         previous: ->
-            return unless playlist.length
+            return unless @playlist.length
             paused = false
-            if current.track > 0
-                current.track--
+            if @current.track > 0
+                @current.track--
             else
-                current.album = (current.album - 1 + playlist.length) % playlist.length
-                current.track = playlist[current.album].tracks.length - 1
-            player.play()  if player.playing
+                @current.album = (@current.album - 1 + @playlist.length) % @playlist.length
+                @current.track = @playlist[@current.album].tracks.length - 1
+            @play() if @playing
 
     playlist.add = (album) ->
         return unless angular.Array.indexOf(playlist, album) is -1
