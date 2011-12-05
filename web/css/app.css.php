@@ -17,16 +17,14 @@ use
 $compass = new Compass('/var/lib/gems/1.8/bin/compass');
 $compass->addLoadPath(__DIR__.'/src');
 
-/*
-$yui = new Yui('../../bin/jar/yuicompressor-2.4.7.jar');
-*/
+$yui = new Yui('../../bin/yuicompressor-2.4.7.jar');
 
 $asset = new Collection(array(
     new File('src/app.scss', array(
         $compass,
     )),
 ), array(
-    // $yui,
+    $yui,
 ));
 
 $asset = new Cache(
