@@ -17,7 +17,7 @@ $coffee = new Coffee();
 $coffee->setBare(true);
 
 $asset = new Collection(array(
-    new File('Tunes.coffee'),
+    new File('src/Tunes.coffee'),
 ), array(
     $coffee,
 ));

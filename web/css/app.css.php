@@ -14,7 +14,6 @@ use
     \Assetic\Filter\CompassFilter as Compass
 ;
 
-
 $compass = new Compass('/var/lib/gems/1.8/bin/compass');
 $compass->addLoadPath(__DIR__.'/src');
 

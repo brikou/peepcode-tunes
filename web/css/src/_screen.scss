@@ -1,16 +1,16 @@
 html, body {
-  height: 100%;
+    height: 100%;
 }
 
 body {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 #container {
-  height: auto;
-  min-height: 100%;
-	position: relative;
+    height: auto;
+    min-height: 100%;
+    position: relative;
 }
 
 .albums {
@@ -28,7 +28,7 @@ body {
 }
 
 .track {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .album .tracks {
@@ -117,8 +117,6 @@ nav button.next:hover {
 }
 
 .library {
-	margin-left: 36%;
-	padding: 0.1em 2%;
+    margin-left: 36%;
+    padding: 0.1em 2%;
 }
-
-/* vim:set sw=4:ts=4:expandtab */
