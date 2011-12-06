@@ -1,6 +1,8 @@
+/*
 body {
     font-family: "Helvetica Neue", "Helvetica", "Calibri", "sans"
 }
+*/
 
 .albums {
 }
@@ -21,33 +23,33 @@ body {
 .playlist {
     color: #eee;
     background-color: #333;
-}
 
-.playlist button.control {
-}
+    button.control {
+    }
 
-.playlist button.play {
-}
+    button.play {
+    }
 
-.playlist button.play:hover {
-}
+    button.play:hover {
+    }
 
-.playlist button.pause {
-}
+    button.pause {
+    }
 
-.playlist button.pause:hover {
-}
+    button.pause:hover {
+    }
 
-.playlist button.prev {
-}
+    button.prev {
+    }
 
-.playlist button.prev:hover {
-}
+    button.prev:hover {
+    }
 
-.playlist button.next {
-}
+    button.next {
+    }
 
-.playlist button.next:hover {
+    button.next:hover {
+    }
 }
 
 .playlist .album .queue.add {
@@ -67,10 +69,8 @@ body {
 }
 
 .library {
-}
-
-.library .album .queue.remove {
-}
-
-.library .album .tracks {
+    .album .queue.remove {
+    }
+    .album .tracks {
+    }
 }

@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="css/app.css.php" />
         <script src="js/app.js.php"></script>
     </head>
-    <body ng:controller="TunesCtrl">
+    <body ng:controller="TunesCtrl" ng:cloak class="ng-cloak">
 
         <div id="container">
 
@@ -34,14 +34,14 @@
                             class="queue-remove"
                             ng:click="player.albums.remove(album)">Remove</button>
 
-                        <span class="album-title">{{album.title}}</span>
-                        <span class="artist-name">{{album.artist}}</span>
+                        <span class="album-title">{{ album.title  }}</span>
+                        <span class="artist-name">{{ album.artist }}</span>
                         <ol class="tracks">
                             <li
                                 class="track"
                                 ng:repeat="track in album.tracks"
                                 ng:class="player.current.track == $index && 'current'"
-                                ng:click="player.play($index, $parent.$index)">{{track.title}}</li>
+                                ng:click="player.play($index, $parent.$index)">{{ track.title }}</li>
                         </ol>
                     </li>
                 </ul>

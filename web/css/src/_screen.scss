@@ -2,11 +2,6 @@ html, body {
     height: 100%;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-}
-
 #container {
     height: auto;
     min-height: 100%;
@@ -38,20 +33,20 @@ body {
     padding: .5em 0 0 1.5em;
 }
 
-/* = queue ================================================================ */
+/* = sprites ============================================================== */
 
 @import "queue/*.png";
-
 $queue-sprite-dimensions: true;
-
 @include all-queue-sprites;
 
-.album {
-    button {
-        @include reset-box-model;
-        @include hide-text;
-        cursor: pointer;
-    }
+@import "control/*.png";
+$control-sprite-dimensions: true;
+@include all-control-sprites;
+
+button {
+    @include reset-box-model;
+    @include hide-text;
+    cursor: pointer;
 }
 
 /* ------------------------------------------------------------------------ */
@@ -67,22 +62,8 @@ $queue-sprite-dimensions: true;
     min-height: 100%;
 }
 
-/* = control ============================================================== */
-
-@import "control/*.png";
-
-$control-sprite-dimensions: true;
-
-@include all-control-sprites;
-
 nav {
     text-align: center;
-
-    button {
-        @include reset-box-model;
-        @include hide-text;
-        cursor: pointer;
-    }
 }
 
 /* ------------------------------------------------------------------------ */
