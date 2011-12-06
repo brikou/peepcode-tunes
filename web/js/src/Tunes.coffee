@@ -9,15 +9,15 @@ TunesCtrl.$inject = [ "$xhr", "player" ]
 
 angular.service "player", (audio) ->
 
-    playlist = []
+    albums = []
 
-    playlist.add = (album) ->
-        return unless angular.Array.indexOf(playlist, album) is -1
-        playlist.push album
+    albums.add = (album) ->
+        return unless angular.Array.indexOf(albums, album) is -1
+        albums.push album
 
-    playlist.remove = (album) ->
-        player.reset() if angular.Array.indexOf(playlist, album) is current.album
-        angular.Array.remove playlist, album
+    albums.remove = (album) ->
+        player.reset() if angular.Array.indexOf(albums, album) is current.album
+        angular.Array.remove albums, album
 
     audio.addEventListener "ended", (=>
         @$apply player.next
@@ -29,15 +29,15 @@ angular.service "player", (audio) ->
         track: 0
 
     player =
-        playlist: playlist
+        albums: albums
         current: current
         playing: false
 
         play: (track, album) ->
-            return unless @playlist.length
+            return unless @albums.length
             @current.track = track if track?
             @current.album = album if album?
-            audio.src = @playlist[@current.album].tracks[@current.track].url unless @paused
+            audio.src = @albums[@current.album].tracks[@current.track].url unless @paused
             audio.play()
             @playing = true
             @paused = false
@@ -54,23 +54,23 @@ angular.service "player", (audio) ->
             @current.track = 0
 
         next: ->
-            return unless @playlist.length
+            return unless @albums.length
             @paused = false
-            if @playlist[@current.album].tracks.length > (@current.track + 1)
+            if @albums[@current.album].tracks.length > (@current.track + 1)
                 @current.track++
             else
                 @current.track = 0
-                @current.album = (@current.album + 1) % @playlist.length
+                @current.album = (@current.album + 1) % @albums.length
             @play() if @playing
 
         previous: ->
-            return unless @playlist.length
+            return unless @albums.length
             @paused = false
             if @current.track > 0
                 @current.track--
             else
-                @current.album = (@current.album - 1 + @playlist.length) % @playlist.length
-                @current.track = @playlist[@current.album].tracks.length - 1
+                @current.album = (@current.album - 1 + @albums.length) % @albums.length
+                @current.track = @albums[@current.album].tracks.length - 1
             @play() if @playing
 
 angular.service "audio", ($document) ->

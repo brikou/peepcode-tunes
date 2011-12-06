@@ -21,7 +21,7 @@ describe "TunesCtrl", ->
         xhr.expectGET("albums.json").respond albums
         ctrlScope = scope.$new(TunesCtrl)
 
-        expect(ctrlScope.player.playlist.length).toBe 0
+        expect(ctrlScope.player.albums.length).toBe 0
         expect(ctrlScope.albums).toBeUndefined()
 
         xhr.flush()
@@ -39,7 +39,7 @@ describe "player service", ->
         @player = angular.service("player")(@audioMock)
 
     it "should initialize the player", ->
-        expect(@player.playlist.length).toBe 0
+        expect(@player.albums.length).toBe 0
         expect(@player.playing).toBe false
         expect(@player.current).toEqual
             album: 0
@@ -55,14 +55,14 @@ describe "player service", ->
             expect(@audioMock.play).not.toHaveBeenCalled()
 
         it "should play the currently selected song", ->
-            @player.playlist.add albums[0]
+            @player.albums.add albums[0]
             @player.play()
             expect(@player.playing).toBe true
             expect(@audioMock.play).toHaveBeenCalled()
             expect(@audioMock.src).toBe "/music/Album A Track A.mp3"
 
         it "should resume playing a song after paused", ->
-            @player.playlist.add albums[0]
+            @player.albums.add albums[0]
             @player.play()
             @player.pause()
             @audioMock.play.reset()
@@ -79,7 +79,7 @@ describe "player service", ->
             expect(@audioMock.pause).not.toHaveBeenCalled()
 
         it "should pause the player when playing", ->
-            @player.playlist.add albums[0]
+            @player.albums.add albums[0]
             @player.play()
             expect(@player.playing).toBe true
             @player.pause()
@@ -88,7 +88,7 @@ describe "player service", ->
 
     describe "reset", ->
         it "should stop currently playing song and reset the internal state", ->
-            @player.playlist.add albums[0]
+            @player.albums.add albums[0]
             @player.current.track = 1
             @player.play()
             expect(@player.playing).toBe true
@@ -107,14 +107,14 @@ describe "player service", ->
                 track: 0
 
         it "should advance to the next song in the album", ->
-            @player.playlist.add albums[0]
+            @player.albums.add albums[0]
             @player.next()
             expect(@player.current).toEqual
                 album: 0
                 track: 1
 
         it "should wrap around when on last song and there is just one album in playlist", ->
-            @player.playlist.add albums[0]
+            @player.albums.add albums[0]
             @player.next()
             @player.next()
             expect(@player.current).toEqual
@@ -122,8 +122,8 @@ describe "player service", ->
                 track: 0
 
         it "should wrap around when on last song and there are multiple albums in playlist", ->
-            @player.playlist.add albums[0]
-            @player.playlist.add albums[1]
+            @player.albums.add albums[0]
+            @player.albums.add albums[1]
             @player.current.album = 1
             @player.current.track = 1
             @player.next()
@@ -132,7 +132,7 @@ describe "player service", ->
                 track: 0
 
         it "should start playing the next song if currently playing", ->
-            @player.playlist.add albums[0]
+            @player.albums.add albums[0]
             @player.play()
             @audioMock.play.reset()
             @player.next()
@@ -148,7 +148,7 @@ describe "player service", ->
                 track: 0
 
         it "should move to the previous song in the album", ->
-            @player.playlist.add albums[0]
+            @player.albums.add albums[0]
             @player.next()
             @player.previous()
             expect(@player.current).toEqual
@@ -156,22 +156,22 @@ describe "player service", ->
                 track: 0
 
         it "should wrap around when on first song and there is just one album in playlist", ->
-            @player.playlist.add albums[0]
+            @player.albums.add albums[0]
             @player.previous()
             expect(@player.current).toEqual
                 album: 0
                 track: 1
 
         it "should wrap around when on first song and there are multiple albums in playlist", ->
-            @player.playlist.add albums[0]
-            @player.playlist.add albums[1]
+            @player.albums.add albums[0]
+            @player.albums.add albums[1]
             @player.previous()
             expect(@player.current).toEqual
                 album: 1
                 track: 1
 
         it "should start playing the next song if currently playing", ->
-            @player.playlist.add albums[0]
+            @player.albums.add albums[0]
             @player.play()
             @audioMock.play.reset()
             @player.previous()
@@ -181,36 +181,36 @@ describe "player service", ->
 
     describe "playlist", ->
         it "should be a simple array", ->
-            expect(@player.playlist.constructor).toBe [].constructor
+            expect(@player.albums.constructor).toBe [].constructor
 
         describe "add", ->
             it "should add an album to the playlist if it's not present there already", ->
-                expect(@player.playlist.length).toBe 0
+                expect(@player.albums.length).toBe 0
 
-                @player.playlist.add albums[0]
-                expect(@player.playlist.length).toBe 1
+                @player.albums.add albums[0]
+                expect(@player.albums.length).toBe 1
 
-                @player.playlist.add albums[1]
-                expect(@player.playlist.length).toBe 2
+                @player.albums.add albums[1]
+                expect(@player.albums.length).toBe 2
 
-                @player.playlist.add albums[0]
-                expect(@player.playlist.length).toBe 2
+                @player.albums.add albums[0]
+                expect(@player.albums.length).toBe 2
 
         describe "remove", ->
             it "should remove an album from the playlist if present", ->
-                @player.playlist.add albums[0]
-                @player.playlist.add albums[1]
-                expect(@player.playlist.length).toBe 2
+                @player.albums.add albums[0]
+                @player.albums.add albums[1]
+                expect(@player.albums.length).toBe 2
 
-                @player.playlist.remove albums[0]
-                expect(@player.playlist.length).toBe 1
-                expect(@player.playlist[0].title).toBe "Album B"
+                @player.albums.remove albums[0]
+                expect(@player.albums.length).toBe 1
+                expect(@player.albums[0].title).toBe "Album B"
 
-                @player.playlist.remove albums[1]
-                expect(@player.playlist.length).toBe 0
+                @player.albums.remove albums[1]
+                expect(@player.albums.length).toBe 0
 
-                @player.playlist.remove albums[0]
-                expect(@player.playlist.length).toBe 0
+                @player.albums.remove albums[0]
+                expect(@player.albums.length).toBe 0
 
 describe "audio service", ->
     it "should create and return html5 audio element", ->

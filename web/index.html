@@ -28,11 +28,11 @@
 
                 <ul class="albums">
                     <li class="album"
-                        ng:repeat="album in player.playlist"
+                        ng:repeat="album in player.albums"
                         ng:class="player.current.album == $index && 'current'">
                         <button
                             class="queue-remove"
-                            ng:click="player.playlist.remove(album)">Remove</button>
+                            ng:click="player.albums.remove(album)">Remove</button>
 
                         <span class="album-title">{{album.title}}</span>
                         <span class="artist-name">{{album.artist}}</span>
@@ -52,7 +52,7 @@
 
                 <ul class="albums">
                     <li class="album current" ng:repeat="album in albums">
-                        <button class="queue-add" ng:click="player.playlist.add(album)">Add</button>
+                        <button class="queue-add" ng:click="player.albums.add(album)">Add</button>
                         <span class="album-title">{{album.title}}</span>
                         <span class="artist-name">{{album.artist}}</span>
                     </li>
