@@ -34,7 +34,8 @@ $coffee = new Coffee();
 $coffee->setBare(true);
 
 $asset = new Collection(array(
-    new File('src/Tunes.coffee'),
+    new File('src/services.coffee'),
+    new File('src/controllers.coffee'),
 ), array(
     $coffee,
 ));

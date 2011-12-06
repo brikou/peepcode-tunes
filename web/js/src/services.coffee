@@ -1,12 +1,4 @@
 
-"use strict"
-
-TunesCtrl = ($xhr, @player) ->
-    $xhr "GET", "albums.json", (code, response) =>
-        @albums = response
-
-TunesCtrl.$inject = [ "$xhr", "player" ]
-
 angular.service "player", (audio) ->
 
     class Player
@@ -70,6 +62,8 @@ angular.service "player", (audio) ->
     ), false
 
     player
+
+# ============================================================================
 
 angular.service "audio", ($document) ->
     $document[0].createElement("audio")
