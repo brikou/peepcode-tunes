@@ -1,15 +1,28 @@
 
+"use strict"
+
 TunesCtrl = ($xhr, @player) ->
     $xhr "GET", "albums.json", (code, response) =>
         @albums = response
-
-"use strict"
 
 TunesCtrl.$inject = [ "$xhr", "player" ]
 
 angular.service "player", (audio) ->
 
     playlist = []
+
+    playlist.add = (album) ->
+        return unless angular.Array.indexOf(playlist, album) is -1
+        playlist.push album
+
+    playlist.remove = (album) ->
+        player.reset() if angular.Array.indexOf(playlist, album) is current.album
+        angular.Array.remove playlist, album
+
+    audio.addEventListener "ended", (=>
+        @$apply player.next
+    ), false
+
     @paused = false
     current =
         album: 0
@@ -22,6 +35,7 @@ angular.service "player", (audio) ->
 
         play: (track, album) ->
             return unless @playlist.length
+
             @current.track = track if angular.isDefined(track)
             @current.album = album if angular.isDefined(album)
             audio.src = @playlist[@current.album].tracks[@current.track].url unless @paused
@@ -59,20 +73,6 @@ angular.service "player", (audio) ->
                 @current.album = (@current.album - 1 + @playlist.length) % @playlist.length
                 @current.track = @playlist[@current.album].tracks.length - 1
             @play() if @playing
-
-    playlist.add = (album) ->
-        return unless angular.Array.indexOf(playlist, album) is -1
-        playlist.push album
-
-    playlist.remove = (album) ->
-        player.reset() if angular.Array.indexOf(playlist, album) is current.album
-        angular.Array.remove playlist, album
-
-    audio.addEventListener "ended", (=>
-        @$apply player.next
-    ), false
-
-    player
 
 angular.service "audio", ($document) ->
     $document[0].createElement("audio")
