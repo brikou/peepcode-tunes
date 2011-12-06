@@ -9,31 +9,25 @@ TunesCtrl.$inject = [ "$xhr", "player" ]
 
 angular.service "player", (audio) ->
 
-    albums = []
+    class Player
+        constructor: ->
+            @playing = false
+            @reset()
 
-    albums.add = (album) ->
-        return unless angular.Array.indexOf(albums, album) is -1
-        albums.push album
+            @albums = []
+            @albums.add = (album) =>
+                return unless angular.Array.indexOf(@albums, album) is -1
+                @albums.push album
+            @albums.remove = (album) =>
+                @reset() if angular.Array.indexOf(@albums, album) is @current.album
+                angular.Array.remove @albums, album
 
-    albums.remove = (album) ->
-        player.reset() if angular.Array.indexOf(albums, album) is current.album
-        angular.Array.remove albums, album
-
-    audio.addEventListener "ended", (=>
-        @$apply player.next
-    ), false
-
-    @paused = false
-    current =
-        album: 0
-        track: 0
-
-    player =
-        albums: albums
-        current: current
-        playing: false
+        reset: ->
+            @pause()
+            @current = { album: 0, track: 0}
 
         play: (track, album) ->
+
             return unless @albums.length
             @current.track = track if track?
             @current.album = album if album?
@@ -47,11 +41,6 @@ angular.service "player", (audio) ->
                 audio.pause()
                 @playing = false
                 @paused = true
-
-        reset: ->
-            @pause()
-            @current.album = 0
-            @current.track = 0
 
         next: ->
             return unless @albums.length
@@ -72,6 +61,14 @@ angular.service "player", (audio) ->
                 @current.album = (@current.album - 1 + @albums.length) % @albums.length
                 @current.track = @albums[@current.album].tracks.length - 1
             @play() if @playing
+
+    player = new Player()
+
+    audio.addEventListener "ended", (=>
+        @$apply player.next
+    ), false
+
+    player
 
 angular.service "audio", ($document) ->
     $document[0].createElement("audio")
