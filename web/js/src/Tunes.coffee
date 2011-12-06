@@ -35,9 +35,8 @@ angular.service "player", (audio) ->
 
         play: (track, album) ->
             return unless @playlist.length
-
-            @current.track = track if angular.isDefined(track)
-            @current.album = album if angular.isDefined(album)
+            @current.track = track if track?
+            @current.album = album if album?
             audio.src = @playlist[@current.album].tracks[@current.track].url unless @paused
             audio.play()
             @playing = true
