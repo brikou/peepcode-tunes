@@ -1,24 +1,18 @@
+
 albumData = [
-    title: "Album A"
-    artist: "Artist A"
-    tracks: [
-        title: "Track A"
-        url: "/music/Album A Track A.mp3"
-    ,
-        title: "Track B"
-        url: "/music/Album A Track B.mp3"
+    {
+        title: "Album A", artist: "Artist A", tracks: [
+            { title: "Track A", url: "/music/Album A Track A.mp3" }
+            { title: "Track B", url: "/music/Album A Track B.mp3" }
         ]
-,
-    title: "Album B"
-    artist: "Artist B"
-    tracks: [
-        title: "Track A"
-        url: "/music/Album B Track A.mp3"
-    ,
-        title: "Track B"
-        url: "/music/Album B Track B.mp3"
+    }
+    {
+        title: "Album B", artist: "Artist B", tracks: [
+            { title: "Track A", url: "/music/Album B Track A.mp3" }
+            { title: "Track B", url: "/music/Album B Track B.mp3" }
         ]
-    ]
+    }
+]
 
 describe "TunesCtrl", ->
     it "should initialize the scope for the view", ->
@@ -216,4 +210,3 @@ describe "audio service", ->
     it "should create and return html5 audio element", ->
         audio = angular.service("audio")([ document ])
         expect(audio.nodeName).toBe "AUDIO"
-
