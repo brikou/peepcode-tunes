@@ -4,7 +4,7 @@ header('Content-Type: application/x-javascript;charset=UTF-8');
 
 chdir(__DIR__);
 
-require_once '../../../vendor/.composer/autoload.php';
+require_once '../../../../vendor/.composer/autoload.php';
 
 use
     \Assetic\Asset\AssetCache as Cache,
@@ -14,12 +14,12 @@ use
     \Assetic\Filter\CoffeeScriptFilter as Coffee
 ;
 
-$compiler = new Compiler('../../../bin/compiler-1592.jar');
+$compiler = new Compiler('../../../../bin/compiler-1592.jar');
 
 $asset = new Collection(array(
-    new File('lib/jasmine-1.1.0/jasmine.js'),
-    new File('lib/jasmine-1.1.0/jasmine-html.js'),
-    new File('lib/angular-mocks-0.10.5.js'),
+    new File('../lib/jasmine-1.1.0/jasmine.js'),
+    new File('../lib/jasmine-1.1.0/jasmine-html.js'),
+    new File('../lib/angular-0.10.5/mocks.js'),
 ), array(
     $compiler,
 ));
@@ -35,7 +35,7 @@ $coffee = new Coffee();
 $coffee->setBare(true);
 
 $asset = new Collection(array(
-    new File('spec/TunesSpec.coffee'),
+    new File('TunesSpec.coffee'),
 ), array(
     $coffee,
 ));
