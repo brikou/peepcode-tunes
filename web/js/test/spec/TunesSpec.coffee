@@ -17,12 +17,14 @@ albums = [
 describe "TunesCtrl", ->
     it "should initialize the scope for the view", ->
         scope = angular.scope()
-        xhrMock = scope.$service("$browser").xhr
-        xhrMock.expectGET("albums.json").respond albums
+        xhr = scope.$service("$browser").xhr
+        xhr.expectGET("albums.json").respond albums
         ctrlScope = scope.$new(TunesCtrl)
+
         expect(ctrlScope.player.playlist.length).toBe 0
         expect(ctrlScope.albums).toBeUndefined()
-        xhrMock.flush()
+
+        xhr.flush()
         expect(ctrlScope.albums).toBe albums
 
 describe "player service", ->
