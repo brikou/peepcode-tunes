@@ -15,9 +15,11 @@ angular.service "player", (audio) ->
             @reset()
 
             @albums = []
+
             @albums.add = (album) =>
                 return unless angular.Array.indexOf(@albums, album) is -1
                 @albums.push album
+
             @albums.remove = (album) =>
                 @reset() if angular.Array.indexOf(@albums, album) is @current.album
                 angular.Array.remove @albums, album
@@ -27,7 +29,6 @@ angular.service "player", (audio) ->
             @current = { album: 0, track: 0}
 
         play: (track, album) ->
-
             return unless @albums.length
             @current.track = track if track?
             @current.album = album if album?
