@@ -10,7 +10,7 @@ TunesCtrl.$inject = [ "$xhr", "player" ]
 angular.service "player", (audio) ->
 
     playlist = []
-    paused = false
+    @paused = false
     current =
         album: 0
         track: 0
@@ -24,16 +24,16 @@ angular.service "player", (audio) ->
             return unless @playlist.length
             @current.track = track if angular.isDefined(track)
             @current.album = album if angular.isDefined(album)
-            audio.src = @playlist[@current.album].tracks[@current.track].url unless paused
+            audio.src = @playlist[@current.album].tracks[@current.track].url unless @paused
             audio.play()
             @playing = true
-            paused = false
+            @paused = false
 
         pause: ->
             if @playing
                 audio.pause()
                 @playing = false
-                paused = true
+                @paused = true
 
         reset: ->
             @pause()
@@ -42,7 +42,7 @@ angular.service "player", (audio) ->
 
         next: ->
             return unless @playlist.length
-            paused = false
+            @paused = false
             if @playlist[@current.album].tracks.length > (@current.track + 1)
                 @current.track++
             else
@@ -52,7 +52,7 @@ angular.service "player", (audio) ->
 
         previous: ->
             return unless @playlist.length
-            paused = false
+            @paused = false
             if @current.track > 0
                 @current.track--
             else
