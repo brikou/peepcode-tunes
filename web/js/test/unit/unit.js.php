@@ -19,7 +19,7 @@ $compiler = new Compiler('../../../../bin/compiler-1592.jar');
 $asset = new Collection(array(
     new File('../lib/jasmine-1.1.0/jasmine.js'),
     new File('../lib/jasmine-1.1.0/jasmine-html.js'),
-    new File('../lib/angular-0.10.5/mocks.js'),
+    new File('../lib/angular-0.10.5/angular-mocks.js'),
 ), array(
     $compiler,
 ));
