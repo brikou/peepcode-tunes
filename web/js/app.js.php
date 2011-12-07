@@ -18,7 +18,7 @@ $compiler = new Compiler('../../bin/compiler-1592.jar');
 
 $asset = new Collection(array(
     new File('lib/angular-0.10.5/angular.js'),
-    new File('lib/angular-0.10.5/init.js'),
+    new File('lib/angular-0.10.5/angular-init.js'),
 ), array(
     $compiler,
 ));
