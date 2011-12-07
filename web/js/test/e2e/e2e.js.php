@@ -9,7 +9,7 @@ require_once '../../../../vendor/.composer/autoload.php';
 use
     \Assetic\Asset\AssetCache as Cache,
     \Assetic\Asset\AssetCollection as Collection,
-    \Assetic\Asset\FileAsset as File,
+    \Assetic\Asset\GlobAsset as Glob,
     \Assetic\Filter\GoogleClosure\CompilerJarFilter as Compiler,
     \Assetic\Filter\CoffeeScriptFilter as Coffee
 ;
@@ -18,7 +18,7 @@ $coffee = new Coffee();
 $coffee->setBare(true);
 
 $asset = new Collection(array(
-    new File('scenario.coffee'),
+    new Glob('*.coffee'),
 ), array(
     $coffee,
 ));
