@@ -30,7 +30,7 @@ $asset = new Cache(
 
 echo $asset->dump();
 
-$compass = new Compass('/usr/local/bin/compass');
+$compass = new Compass('compass');
 $compass->addLoadPath(__DIR__.'/src');
 $compass->setNoLineComments(true);
 $compass->setImagesDir(__DIR__.'/../images');
